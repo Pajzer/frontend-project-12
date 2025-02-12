@@ -1,0 +1,19 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "analog of Slack chat",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pajzer/frontend-project-12.git"
+  },
+  "author": "Pajzer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pajzer/frontend-project-12/issues"
+  },
+  "homepage": "https://github.com/Pajzer/frontend-project-12#readme"
+}
