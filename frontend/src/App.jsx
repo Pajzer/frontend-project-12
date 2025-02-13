@@ -1,17 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import RegistrationPage from './pages/RegistrationPage.jsx';
+import { Container, Navbar } from 'react-bootstrap';
+import PageNotFound from './pages/NotFoundPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 
-const App = () => {
-  return (
-    <BrowserRouter>
+const App = () => (
+  <BrowserRouter>
+    <div className="d-flex h-100 flex-column">
+      <Navbar bg="white" expand="lg" className="shadow-sm">
+        <Container>
+          <Navbar.Brand href="/">Chat</Navbar.Brand>
+        </Container>
+      </Navbar>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="registration" element={<RegistrationPage />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </BrowserRouter>
-  );
-}
+    </div>
+  </BrowserRouter>
+);
 
 export default App;
