@@ -1,9 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './pages/LoginPage.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import RegistrationPage from './pages/RegistrationPage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
 
-function App() {
+const App = () => {
   return (
-    <Login />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="registration" element={<RegistrationPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

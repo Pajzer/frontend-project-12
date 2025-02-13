@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const SignInForm = () => {
+const LoginForm = () => {
   return (
     <Form>
       <h1 className="text-center mb-4">Войти</h1>
@@ -11,11 +11,11 @@ const SignInForm = () => {
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Control type="password" placeholder="Пароль" />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="outline-primary" type="submit" className="w-100">
         Войти
       </Button>
     </Form>
   );
 };
 
-export default SignInForm;
+export default LoginForm;
