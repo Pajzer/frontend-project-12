@@ -3,15 +3,17 @@ import axios from 'axios';
 import loginPic from '../assets/login.jpg';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../slices/authSlice';
 
-const handleSubmit = async (values, navigate, setStatus) => {
+const handleSubmit = async (values, navigate, setStatus, dispatch) => {
   try {
     const response = await axios.post('/api/v1/login', {
       username: values.username,
       password: values.password,
      });
     const token = response.data.token;
-    localStorage.setItem('token', token);
+    dispatch(loginSuccess(token));
     setStatus();
     navigate('/');
   } catch (error) {
@@ -22,12 +24,13 @@ const handleSubmit = async (values, navigate, setStatus) => {
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
-    onSubmit: (values, { setStatus }) => handleSubmit(values, navigate, setStatus),
+    onSubmit: (values, { setStatus }) => handleSubmit(values, navigate, setStatus, dispatch),
   });
   return (
     <Container className='container-fluid h-100'>
