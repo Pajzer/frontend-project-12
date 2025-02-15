@@ -1,16 +1,33 @@
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import axios from 'axios';
 import loginPic from '../assets/login.jpg';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+
+const handleSubmit = async (values, navigate, setStatus) => {
+  try {
+    const response = await axios.post('/api/v1/login', {
+      username: values.username,
+      password: values.password,
+     });
+    const token = response.data.token;
+    localStorage.setItem('token', token);
+    setStatus();
+    navigate('/');
+  } catch (error) {
+    console.log('Ошибка во время отправки данных:', error);
+    setStatus('Неверное имя пользователя или пароль');
+  }
+}
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
-    onSubmit: (values) => {
-      console.log('Отправка данных', values)
-    },
+    onSubmit: (values, { setStatus }) => handleSubmit(values, navigate, setStatus),
   });
   return (
     <Container className='container-fluid h-100'>
