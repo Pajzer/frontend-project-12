@@ -4,15 +4,12 @@ import PageNotFound from './pages/NotFoundPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import ChatPage from './pages/ChatPage.jsx';
 import ProtectedRoutes from './utils/ProtectedRoutes.jsx';
+import Header from './pages/Header.jsx';
 
 const App = () => {
   return (
     <div className='d-flex flex-column h-100'>
-      <nav className='shadow-sm navbar navbar-expand-lg navbar-light bg-white'>
-        <div className="container">
-          <a href="/login" className='navbar-brand'>Chat</a>
-        </div>
-      </nav>
+      <Header />
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<LoginPage />} />
