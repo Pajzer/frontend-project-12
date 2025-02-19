@@ -5,10 +5,11 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../slices/authSlice';
+import { BASE_API_URL } from '../utils/routes';
 
 const handleSubmit = async (values, navigate, setStatus, dispatch) => {
   try {
-    const response = await axios.post('/api/v1/login', {
+    const response = await axios.post(`${BASE_API_URL}/login`, {
       username: values.username,
       password: values.password,
      });

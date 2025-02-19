@@ -14,12 +14,21 @@ const Header = () => {
     }
   };
 
+  const renderChatLink = () => {
+    if (isLoggedIn) {
+      return (
+        <a href='/' className='navbar-brand'>Чаты</a>
+      );
+    }
+  };
+
   return (
     <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
       <div className="container">
         <a href="/login" className="navbar-brand">
           Hexlet Chat
         </a>
+        {renderChatLink()}
         {renderLogoutButton()}
       </div>
     </nav>
