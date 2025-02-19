@@ -4,8 +4,16 @@ import App from './App.jsx';
 import resources from './locales/index.js';
 import { Provider } from 'react-redux';
 import store from './slices/index.js'
+import { io } from 'socket.io-client'
+import { addMessage } from './slices/messagesSlice.js';
 
 const init = async () => {
+  const socket = io();
+
+  socket.on('newMessage', (payload) => {
+    store.dispatch(addMessage(payload));
+  });
+
   const i18n = i18next.createInstance();
 
   await i18n

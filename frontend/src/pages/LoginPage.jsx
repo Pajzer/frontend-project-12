@@ -13,7 +13,8 @@ const handleSubmit = async (values, navigate, setStatus, dispatch) => {
       password: values.password,
      });
     const token = response.data.token;
-    dispatch(loginSuccess(token));
+    const username = response.data.username;
+    dispatch(loginSuccess({ token, username }));
     setStatus();
     navigate('/');
   } catch (error) {

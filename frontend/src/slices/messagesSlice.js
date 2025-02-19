@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchmessagesByToken = createAsyncThunk(
-  'messages/fetchmessagesByToken',
+export const fetchMessagesByToken = createAsyncThunk(
+  'messages/fetchMessagesByToken',
   async (token) => {
     const response = await axios.get('/api/v1/messages', {
       headers: { Authorization: `Bearer ${token}` },
@@ -11,26 +11,55 @@ export const fetchmessagesByToken = createAsyncThunk(
   }
 );
 
+export const sendMessagesByToken = createAsyncThunk(
+  'messages/sendMessagesByToken',
+  async ({ token, newMessage }) => {
+    const response = await axios.post('/api/v1/messages', newMessage, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  }
+)
+
 const messagesSlice = createSlice({
   name: 'messages',
   initialState: { messagesData: [], loadingStatus: 'idle', error: null },
-  reducers: {},
+  reducers: {
+    addMessage: (state, action) => {
+      state.messagesData.push(action.payload);
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchmessagesByToken.pending, (state) => {
+    // Получение сообщений
+      .addCase(fetchMessagesByToken.pending, (state) => {
         state.loadingStatus = 'loading';
         state.error = null;
       })
-      .addCase(fetchmessagesByToken.fulfilled, (state, { payload }) => {
+      .addCase(fetchMessagesByToken.fulfilled, (state, { payload }) => {
         state.messagesData = payload;
         state.loadingStatus = 'idle';
         state.error = null;
       })
-      .addCase(fetchmessagesByToken.rejected, (state, action) => {
+      .addCase(fetchMessagesByToken.rejected, (state, action) => {
         state.loadingStatus = 'rejected';
         state.error = action.error;
-      });
+      })
+    // Отправка сообщений
+    .addCase(sendMessagesByToken.pending, (state) => {
+      state.loadingStatus = 'loading';
+      state.error = null;
+    })
+    .addCase(sendMessagesByToken.fulfilled, (state) => {
+      state.loadingStatus = 'idle';
+      state.error = null;
+    })
+    .addCase(sendMessagesByToken.rejected, (state, action) => {
+      state.loadingStatus = 'rejected';
+      state.error = action.error;
+    })
   },
 });
 
 export default messagesSlice.reducer;
+export const { addMessage } = messagesSlice.actions;
