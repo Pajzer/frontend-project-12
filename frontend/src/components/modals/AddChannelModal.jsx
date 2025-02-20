@@ -1,11 +1,11 @@
 import { Button, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { setStatusChannelModal } from '../../slices/modalsSlice.js';
+import { setStatusChannelModal } from '../../slices/modalsSlice';
 import ChannelForm from '../ChannelForm.jsx';
 
-const ChannelModal = () => {
+const AddChannelModal = () => {
   const dispatch = useDispatch();
-  const modalStatus = useSelector(({ modals }) => modals.addChannelModal);
+  const modalStatus = useSelector(({ ui }) => ui.modals.addChannelModal);
 
   return (
     <>
@@ -13,7 +13,7 @@ const ChannelModal = () => {
         type="button"
         variant="link"
         className="p-0 text-primary btn-group-vertical"
-        onClick={() => dispatch(setStatusChannelModal(true))}
+        onClick={() => dispatch(setStatusChannelModal({ modalName: 'addChannelModal', status: true }))}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ const ChannelModal = () => {
       </Button>
       <Modal
         show={modalStatus}
-        onHide={() => dispatch(setStatusChannelModal(false))}
+        onHide={() => dispatch(setStatusChannelModal({ modalName: 'addChannelModal', status: false }))}
         dialogClassName="modal-dialog-centered"
       >
         <Modal.Header>
@@ -38,7 +38,7 @@ const ChannelModal = () => {
             aria-label="Close"
             data-bs-dismiss="modal"
             variant="close"
-            onClick={() => dispatch(setStatusChannelModal(false))}
+            onClick={() => dispatch(setStatusChannelModal({ modalName: 'addChannelModal', status: false }))}
           ></Button>
         </Modal.Header>
         <Modal.Body>
@@ -49,4 +49,4 @@ const ChannelModal = () => {
   );
 };
 
-export default ChannelModal;
+export default AddChannelModal;
