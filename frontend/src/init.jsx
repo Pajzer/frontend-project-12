@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './slices/index.js'
 import { io } from 'socket.io-client'
 import { addMessage } from './slices/messagesSlice.js';
+import { addChannel } from './slices/channelsSlice.js';
 
 const init = async () => {
   const socket = io();
@@ -14,14 +15,16 @@ const init = async () => {
     store.dispatch(addMessage(payload));
   });
 
+  socket.on('newChannel', (payload) => {
+    store.dispatch(addChannel(payload));
+  });
+
   const i18n = i18next.createInstance();
 
-  await i18n
-    .use(initReactI18next)
-    .init({
-      resources,
-      fallbackLng: 'ru',
-    });
+  await i18n.use(initReactI18next).init({
+    resources,
+    fallbackLng: 'ru',
+  });
 
   return (
     <Provider store={store}>
