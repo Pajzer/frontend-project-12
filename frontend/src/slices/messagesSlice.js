@@ -28,11 +28,13 @@ const messagesSlice = createSlice({
   reducers: {
     addMessage: (state, action) => {
       state.messagesData.push(action.payload);
-    }
+    },
+    removeMessageByChannelId: ( state, { payload }) => {
+      state.messagesData = state.messagesData.filter((message) => message.channelId !== payload.id);
+    },
   },
   extraReducers: (builder) => {
     builder
-    // Получение сообщений
       .addCase(fetchMessagesByToken.pending, (state) => {
         state.loadingStatus = 'loading';
         state.error = null;
@@ -46,7 +48,6 @@ const messagesSlice = createSlice({
         state.loadingStatus = 'rejected';
         state.error = action.error;
       })
-    // Отправка сообщений
     .addCase(sendMessagesByToken.pending, (state) => {
       state.loadingStatus = 'loading';
       state.error = null;
@@ -63,4 +64,4 @@ const messagesSlice = createSlice({
 });
 
 export default messagesSlice.reducer;
-export const { addMessage } = messagesSlice.actions;
+export const { addMessage, removeMessageByChannelId } = messagesSlice.actions;
