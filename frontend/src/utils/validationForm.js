@@ -1,7 +1,9 @@
 import * as yup from 'yup';
 
-const createAddChannelSchema = (channels) => {
-  const createdChannels = channels.map(({ name }) => name);
+const channelSchema = (channels, currentChannelName = '') => {
+  const createdChannels = channels
+    .map(({ name }) => name)
+    .filter((name) => name !== currentChannelName);
   return yup.object().shape({
     name: yup.string()
     .required('Обязательное поле')
@@ -11,4 +13,4 @@ const createAddChannelSchema = (channels) => {
   })
 }
 
-export default createAddChannelSchema;
+export default channelSchema;
