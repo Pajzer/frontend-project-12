@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import ChatPage from './pages/ChatPage.jsx';
 import ProtectedRoutes from './utils/ProtectedRoutes.jsx';
 import Header from './pages/Header.jsx';
+import RegistrationPage from './pages/RegistrationPage.jsx';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<RegistrationPage />} />
           <Route element={<ProtectedRoutes />}>
             <Route path='/' element={<ChatPage />} />
           </Route>

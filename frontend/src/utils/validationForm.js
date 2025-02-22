@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const channelSchema = (channels, currentChannelName = '') => {
+export const channelSchema = (channels, currentChannelName = '') => {
   const createdChannels = channels
     .map(({ name }) => name)
     .filter((name) => name !== currentChannelName);
@@ -13,4 +13,20 @@ const channelSchema = (channels, currentChannelName = '') => {
   })
 }
 
-export default channelSchema;
+export const signupSchema = () => {
+  return yup.object().shape({
+    username: yup
+      .string()
+      .required('Обязательное поле')
+      .min(3, 'От 3 до 20 символов')
+      .max(20, 'От 3 до 20 символов'),
+    password: yup
+      .string()
+      .required('Обязательное поле')
+      .min(6, 'Не менее 6 символов'),
+    confirmPassword: yup
+      .string()
+      .required('Обязательное поле')
+      .oneOf([yup.ref('password')], 'Пароли должны совпадать')
+  })
+};
