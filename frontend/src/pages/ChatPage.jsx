@@ -6,9 +6,11 @@ import { fetchMessagesByToken } from '../slices/messagesSlice';
 import MessageForm from './MessageForm.jsx';
 import AddChannelModal from '../components/modals/AddChannelModal.jsx';
 import ChannelsList from '../components/ChannelsList.jsx';
+import { useTranslation } from "react-i18next";
 
 const ChatPage = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const token = useSelector(({ auth }) => auth.token);
   const username = useSelector(({ auth }) => auth.username);
   const channels = useSelector(({ channels }) => channels.channelsData);
@@ -48,7 +50,7 @@ const ChatPage = () => {
           className="col-md-2 border-end px-0 bg-light flex-column h-100 d-flex"
         >
           <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-            <b>Каналы</b>
+            <b>{t('chat.title')}</b>
             <AddChannelModal />
           </div>
           <Nav
@@ -66,7 +68,7 @@ const ChatPage = () => {
                 <b># {ActiveChannelForTitle.name}</b>
               </p>
               <span className="text-muted">
-                {filteredMessage.length} сообщений
+                {t('chat.messages_count', { count: filteredMessage.length })}
               </span>
             </div>
             {renderMessages()}

@@ -4,9 +4,11 @@ import { setStatusChannelModal } from '../../slices/modalsSlice';
 import { renameChannelById } from '../../slices/channelsSlice';
 import { useFormik } from 'formik';
 import { channelSchema } from '../../utils/validationForm';
+import { useTranslation } from "react-i18next";
 
 const RenameChannelModal = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { activeChannelId } = useSelector(({ ui }) => ui.modals);
   const modalStatus = useSelector(({ ui }) => ui.modals.renameChannelModal);
   const token = useSelector(({ auth }) => auth.token);
@@ -17,7 +19,7 @@ const RenameChannelModal = () => {
     initialValues: {
       name: channel.name,
     },
-    validationSchema: channelSchema(channels, channel.name),
+    validationSchema: channelSchema(channels, t, channel.name),
     onSubmit: (values, { resetForm }) => {
       const editedChannel = { name: values.name };
       dispatch(renameChannelById({ token, id: channel.id, editedChannel }));
@@ -47,7 +49,7 @@ const RenameChannelModal = () => {
       dialogClassName="modal-dialog-centered"
     >
       <Modal.Header>
-        <Modal.Title>Переименовать</Modal.Title>
+        <Modal.Title>{t('renameChannelModal.title')}</Modal.Title>
         <Button
           aria-label="Close"
           data-bs-dismiss="modal"
@@ -70,6 +72,7 @@ const RenameChannelModal = () => {
               name="name"
               id="name"
               className="mb-2"
+              placeholder={t('renameChannelModal.placeholder')}
               onChange={formik.handleChange}
               value={formik.values.name}
               isInvalid={formik.errors.name && formik.touched.name}
@@ -91,9 +94,9 @@ const RenameChannelModal = () => {
                   )
                 }
               >
-                Отменить
+                {t('renameChannelModal.cancel')}
               </Button>
-              <Button type="submit">Отправить</Button>
+              <Button type="submit">{t('renameChannelModal.submit')}</Button>
             </div>
           </Form.Group>
         </Form>

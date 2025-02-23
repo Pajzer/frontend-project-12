@@ -2,18 +2,20 @@ import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStatusChannelModal } from '../slices/modalsSlice.js';
 import { useFormik } from 'formik';
-import {  channelSchema } from '../utils/validationForm.js';
+import { channelSchema } from '../utils/validationForm.js';
 import { createChannelsByToken } from '../slices/channelsSlice';
+import { useTranslation } from "react-i18next";
 
 const ChannelForm = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const token = useSelector(({ auth }) => auth.token);
   const channels = useSelector(({ channels }) => channels.channelsData);
   const formik = useFormik({
     initialValues: {
       name: '',
     },
-    validationSchema: channelSchema(channels),
+    validationSchema: channelSchema(channels, t),
     onSubmit: (values, { resetForm }) => {
       const newChannel = {
         name: values.name,
@@ -33,9 +35,10 @@ const ChannelForm = () => {
           onChange={formik.handleChange}
           value={formik.values.name}
           isInvalid={formik.errors.name && formik.touched.name}
-        ></Form.Control>
+          placeholder={t('channelForm.label')}
+          />
         <label className="visually-hidden" htmlFor="name">
-          Имя канала
+          {t('channelForm.label')}
         </label>
         {formik.errors.name && (
           <Form.Control.Feedback type='invalid'>
@@ -48,9 +51,9 @@ const ChannelForm = () => {
             className="me-2"
             onClick={() => dispatch(setStatusChannelModal({ modalName: 'addChannelModal', status: false }))}
           >
-            Отменить
+            {t('channelForm.cancel')}
           </Button>
-          <Button type="submit">Отправить</Button>
+          <Button type="submit">{t('channelForm.submit')}</Button>
         </div>
       </Form.Group>
     </Form>
