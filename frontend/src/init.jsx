@@ -10,8 +10,14 @@ import { addChannel, removeChannel, renameChannel } from './slices/channelsSlice
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import leoProfanity from 'leo-profanity';
+import { ErrorBoundary } from "@rollbar/react";
 
 export const i18n = i18next.createInstance();
+
+const rollbarConfig = {
+  accessToken: import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN,
+  environment: import.meta.env.MODE,
+};
 
 const init = async () => {
   const socket = io();
@@ -54,12 +60,14 @@ const init = async () => {
   });
 
   return (
-    <Provider store={store}>
-      <I18nextProvider i18n={i18n}>
-        <App profanityFilter={leoProfanity} />
-        <ToastContainer />
-      </I18nextProvider>
-    </Provider>
+    <ErrorBoundary config={rollbarConfig}>
+      <Provider store={store}>
+        <I18nextProvider i18n={i18n}>
+          <App />
+          <ToastContainer />
+        </I18nextProvider>
+      </Provider>
+    </ErrorBoundary>
   );
 };
 
