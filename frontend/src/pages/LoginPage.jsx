@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../slices/authSlice';
-import { BASE_API_URL } from '../utils/routes';
+import { BASE_API_URL, handleApiError } from '../utils/routes';
 import { useTranslation } from "react-i18next";
 
 const handleSubmit = async (values, navigate, setStatus, dispatch, t) => {
@@ -20,8 +20,11 @@ const handleSubmit = async (values, navigate, setStatus, dispatch, t) => {
     setStatus();
     navigate('/');
   } catch (error) {
-    console.log('Ошибка во время отправки данных:', error);
-    setStatus(t('login.errors.wrongLogin'));
+    if (error.code == 'ERR_NETWORK') {
+      handleApiError(error, t);
+    } else {
+      setStatus(t('login.errors.wrongLogin'));
+    }
   }
 }
 

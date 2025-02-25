@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { BASE_API_URL } from '../utils/routes';
+import { BASE_API_URL, handleApiError } from '../utils/routes';
 
 export const fetchMessagesByToken = createAsyncThunk(
   'messages/fetchMessagesByToken',
@@ -47,6 +47,7 @@ const messagesSlice = createSlice({
       .addCase(fetchMessagesByToken.rejected, (state, action) => {
         state.loadingStatus = 'rejected';
         state.error = action.error;
+        handleApiError(action.error);
       })
     .addCase(sendMessagesByToken.pending, (state) => {
       state.loadingStatus = 'loading';
@@ -59,6 +60,7 @@ const messagesSlice = createSlice({
     .addCase(sendMessagesByToken.rejected, (state, action) => {
       state.loadingStatus = 'rejected';
       state.error = action.error;
+      handleApiError(action.error);
     })
   },
 });

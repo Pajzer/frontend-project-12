@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { BASE_API_URL } from '../utils/routes';
+import { BASE_API_URL, handleApiError } from '../utils/routes';
 
 export const fetchChannelsByToken = createAsyncThunk(
   'channels/fetchChannelsByToken',
@@ -87,6 +87,7 @@ const channelsSlice = createSlice({
       .addCase(fetchChannelsByToken.rejected, (state, action) => {
         state.loadingStatus = 'rejected';
         state.error = action.error;
+        handleApiError(action.error);
       })
       .addCase(createChannelsByToken.pending, (state) => {
         state.loadingStatus = 'loading';
@@ -100,6 +101,7 @@ const channelsSlice = createSlice({
       .addCase(createChannelsByToken.rejected, (state, action) => {
         state.loadingStatus = 'rejected';
         state.error = action.error;
+        handleApiError(action.error);
       })
       .addCase(removeChannelById.pending, (state) => {
         state.loadingStatus = 'loading';
@@ -116,6 +118,7 @@ const channelsSlice = createSlice({
       .addCase(removeChannelById.rejected, (state, action) => {
         state.loadingStatus = 'rejected';
         state.error = action.error;
+        handleApiError(action.error);
       })
       .addCase(renameChannelById.pending, (state) => {
         state.loadingStatus = 'loading';
@@ -130,6 +133,7 @@ const channelsSlice = createSlice({
       .addCase(renameChannelById.rejected, (state, action) => {
         state.loadingStatus = 'rejected';
         state.error = action.error.message;
+        handleApiError(action.error);
       });
   },
 });
