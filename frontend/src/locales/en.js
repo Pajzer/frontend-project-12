@@ -14,10 +14,10 @@ export default {
       title: 'Sign Up',
       placeholder_username: 'Username',
       placeholder_password: 'Password',
-      placeholder_confrimpassword: 'Confirm Password',
+      placeholder_confirmPassword: 'Confirm Password',
       button: 'Register',
       errors: {
-        alredyRegistred: 'This user already exists',
+        alreadyRegistered: 'This user already exists',
       },
     },
     chat: {

@@ -27,7 +27,7 @@ const RegistrationPage = () => {
       }
 
       if (signupUser.rejected.type === resultAction.type && resultAction.error.message.includes('409')) {
-        setFieldError('username', t('registration.errors.alredyRegistred'));
+        setFieldError('username', t('registration.errors.alreadyRegistered'));
       }
     },
   });
@@ -91,7 +91,7 @@ const RegistrationPage = () => {
                   <Form.Control
                     className="form-control"
                     type="password"
-                    placeholder={t('registration.placeholder_confrimpassword')}
+                    placeholder={t('registration.placeholder_confirmPassword')}
                     name="confirmPassword"
                     autoComplete="new-password"
                     onChange={formik.handleChange}
@@ -100,7 +100,7 @@ const RegistrationPage = () => {
                     onBlur={formik.handleBlur}
                     required
                   ></Form.Control>
-                  <Form.Label>{t('registration.placeholder_confrimpassword')}</Form.Label>
+                  <Form.Label>{t('registration.placeholder_confirmPassword')}</Form.Label>
                   {formik.errors.confirmPassword && (
                     <Form.Control.Feedback type="invalid" tooltip>
                       {formik.errors.confirmPassword}
