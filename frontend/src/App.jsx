@@ -4,7 +4,7 @@ import PageNotFound from './pages/NotFoundPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import ChatPage from './pages/ChatPage.jsx';
 import ProtectedRoutes from './utils/ProtectedRoutes.jsx';
-import Header from './pages/Header.jsx';
+import Header from './components/Header.jsx';
 import RegistrationPage from './pages/RegistrationPage.jsx';
 
 const App = () => {

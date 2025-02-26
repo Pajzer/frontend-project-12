@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchChannelsByToken } from '../slices/channelsSlice';
 import { fetchMessagesByToken } from '../slices/messagesSlice';
-import MessageForm from './MessageForm.jsx';
+import MessageForm from '../components/MessageForm.jsx';
 import AddChannelModal from '../components/modals/AddChannelModal.jsx';
 import ChannelsList from '../components/ChannelsList.jsx';
 import { useTranslation } from "react-i18next";
