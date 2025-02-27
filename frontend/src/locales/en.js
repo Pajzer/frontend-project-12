@@ -25,6 +25,7 @@ export default {
       messages_count: '{{count}} message',
       messages_count_plural: '{{count}} messages',
       messages_count_many: '{{count}} messages',
+      hidden_button: 'Сhannel control',
     },    
     addChannelModal: {
       title: 'Add Channel',
