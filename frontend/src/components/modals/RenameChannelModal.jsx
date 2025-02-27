@@ -1,11 +1,11 @@
+import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import leoProfanity from 'leo-profanity';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStatusChannelModal } from '../../slices/modalsSlice';
 import { renameChannelById } from '../../slices/channelsSlice';
-import { useFormik } from 'formik';
 import { channelSchema } from '../../utils/validationForm';
-import { useTranslation } from "react-i18next";
-import leoProfanity from 'leo-profanity';
 
 const RenameChannelModal = () => {
   const dispatch = useDispatch();
@@ -13,24 +13,24 @@ const RenameChannelModal = () => {
   const { activeChannelId } = useSelector(({ ui }) => ui.modals);
   const modalStatus = useSelector(({ ui }) => ui.modals.renameChannelModal);
   const token = useSelector(({ auth }) => auth.token);
-  const channels = useSelector(({ channels }) => channels.channelsData);
-  const channel = channels.find((channel) => channel.id === activeChannelId);
+  const channelsData = useSelector(({ channels }) => channels.channelsData);
+  const activeChannel = channelsData.find((ch) => ch.id === activeChannelId);
 
   const formik = useFormik({
     initialValues: {
-      name: channel.name,
+      name: activeChannel.name,
     },
-    validationSchema: channelSchema(channels, t, channel.name),
+    validationSchema: channelSchema(channelsData, t, activeChannel.name),
     onSubmit: (values, { resetForm }) => {
       const cleanChannelName = leoProfanity.clean(values.name);
       const editedChannel = { name: cleanChannelName };
-      dispatch(renameChannelById({ token, id: channel.id, editedChannel }));
+      dispatch(renameChannelById({ token, id: activeChannel.id, editedChannel }));
       dispatch(
         setStatusChannelModal({
           modalName: 'renameChannelModal',
           status: false,
           channelId: null,
-        })
+        }),
       );
       resetForm();
     },
@@ -45,7 +45,7 @@ const RenameChannelModal = () => {
             modalName: 'renameChannelModal',
             status: false,
             channelId: null,
-          })
+          }),
         )
       }
       dialogClassName="modal-dialog-centered"
@@ -62,10 +62,10 @@ const RenameChannelModal = () => {
                 modalName: 'renameChannelModal',
                 status: false,
                 channelId: null,
-              })
+              }),
             )
           }
-        ></Button>
+        />
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
@@ -78,8 +78,10 @@ const RenameChannelModal = () => {
               onChange={formik.handleChange}
               value={formik.values.name}
               isInvalid={formik.errors.name && formik.touched.name}
-            ></Form.Control>
-            <label className="visually-hidden" htmlFor="name">{t('renameChannelModal.hidden_title')}</label>
+            />
+            <label className="visually-hidden" htmlFor="name">
+              {t('renameChannelModal.hidden_title')}
+            </label>
             <Form.Control.Feedback type="invalid">
               {formik.errors.name}
             </Form.Control.Feedback>
@@ -93,7 +95,7 @@ const RenameChannelModal = () => {
                       modalName: 'renameChannelModal',
                       status: false,
                       channelId: null,
-                    })
+                    }),
                   )
                 }
               >

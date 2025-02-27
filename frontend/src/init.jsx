@@ -1,16 +1,16 @@
+import { Provider } from 'react-redux';
+import { io } from 'socket.io-client';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import leoProfanity from 'leo-profanity';
+import { ErrorBoundary } from '@rollbar/react';
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import App from './App.jsx';
 import resources from './locales/index.js';
-import { Provider } from 'react-redux';
 import store from './slices/index.js';
-import { io } from 'socket.io-client';
 import { addMessage, removeMessageByChannelId } from './slices/messagesSlice.js';
 import { addChannel, removeChannel, renameChannel } from './slices/channelsSlice.js';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import leoProfanity from 'leo-profanity';
-import { ErrorBoundary } from "@rollbar/react";
 
 export const i18n = i18next.createInstance();
 
@@ -44,14 +44,12 @@ const init = async () => {
 
   const russianWords = leoProfanity.getDictionary('ru');
   const englishWords = leoProfanity.getDictionary('en');
-
   const combinedWords = [...russianWords, ...englishWords];
 
   leoProfanity.addDictionary('multiLang', combinedWords);
   leoProfanity.loadDictionary('multiLang');
 
-  const state = store.getState();
-  const currentLanguage = state.language.currentLanguage;
+  const { language: { currentLanguage } } = store.getState();
 
   await i18n.use(initReactI18next).init({
     resources,

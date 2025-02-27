@@ -1,8 +1,8 @@
-import { Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../slices/authSlice";
-import { useTranslation } from "react-i18next";
-import { changeLanguage } from "../slices/langSlice";
+import { Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../slices/authSlice';
+import { useTranslation } from 'react-i18next';
+import { changeLanguage } from '../slices/langSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const Header = () => {
   const renderChatLink = () => {
     if (isLoggedIn) {
       return (
-        <a href='/' className='navbar-brand'>{t('header.chat')}</a>
+        <a href="/" className="navbar-brand">{t('header.chat')}</a>
       );
     }
     return null;
@@ -33,19 +33,19 @@ const Header = () => {
       { label: 'Ru', code: 'ru' },
       { label: 'En', code: 'en' },
     ];
-  
+
     const handleChangeLanguage = (lang) => {
       i18n.changeLanguage(lang);
       dispatch(changeLanguage(lang));
     };
-  
+
     return (
       <div className="language-buttons me-2">
         {languages.map(({ label, code }) => (
           <Button
             key={code}
             type="button"
-            variant={`${currentLanguage === code ? 'secondary' : 'outline-secondary'} mx-1`}
+            variant={currentLanguage === code ? 'secondary' : 'outline-secondary'}
             onClick={() => handleChangeLanguage(code)}
           >
             {label}

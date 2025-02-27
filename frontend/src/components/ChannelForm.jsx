@@ -1,22 +1,23 @@
+import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import leoProfanity from 'leo-profanity';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStatusChannelModal } from '../slices/modalsSlice.js';
-import { useFormik } from 'formik';
 import { channelSchema } from '../utils/validationForm.js';
 import { createChannelsByToken } from '../slices/channelsSlice';
-import { useTranslation } from "react-i18next";
-import leoProfanity from 'leo-profanity';
 
 const ChannelForm = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const token = useSelector(({ auth }) => auth.token);
-  const channels = useSelector(({ channels }) => channels.channelsData);
+  const channelsList = useSelector(({ channels }) => channels.channelsData);
+
   const formik = useFormik({
     initialValues: {
       name: '',
     },
-    validationSchema: channelSchema(channels, t),
+    validationSchema: channelSchema(channelsList, t),
     onSubmit: (values, { resetForm }) => {
       const cleanChannelName = leoProfanity.clean(values.name);
       const newChannel = {
@@ -27,6 +28,7 @@ const ChannelForm = () => {
       resetForm();
     },
   });
+
   return (
     <Form onSubmit={formik.handleSubmit}>
       <Form.Group>
@@ -38,12 +40,12 @@ const ChannelForm = () => {
           value={formik.values.name}
           isInvalid={formik.errors.name && formik.touched.name}
           placeholder={t('channelForm.label')}
-          />
+        />
         <label className="visually-hidden" htmlFor="name">
           {t('channelForm.label')}
         </label>
         {formik.errors.name && (
-          <Form.Control.Feedback type='invalid'>
+          <Form.Control.Feedback type="invalid">
             {formik.errors.name}
           </Form.Control.Feedback>
         )}
