@@ -4,7 +4,7 @@ import page404 from '../assets/page404.svg';
 
 const PageNotFound = () => {
   const { t } = useTranslation();
-  
+
   return (
     <div className="d-flex flex-column h-100">
       <div className="text-center bg-light">

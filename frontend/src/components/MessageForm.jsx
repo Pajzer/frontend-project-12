@@ -2,8 +2,8 @@ import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import leoProfanity from 'leo-profanity';
-import { sendMessagesByToken } from '../slices/messagesSlice';
 import { useTranslation } from 'react-i18next';
+import { sendMessagesByToken } from '../slices/messagesSlice';
 
 const MessageForm = () => {
   const dispatch = useDispatch();

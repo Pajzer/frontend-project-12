@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
@@ -140,4 +141,6 @@ const channelsSlice = createSlice({
 });
 
 export default channelsSlice.reducer;
-export const { selectActiveTab, addChannel, removeChannel, renameChannel } = channelsSlice.actions;
+export const {
+  selectActiveTab, addChannel, removeChannel, renameChannel,
+} = channelsSlice.actions;

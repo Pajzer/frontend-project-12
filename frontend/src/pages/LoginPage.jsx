@@ -1,12 +1,19 @@
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+} from 'react-bootstrap';
 import axios from 'axios';
 import loginPic from '../assets/login.jpg';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from "react-i18next";
 import { loginSuccess } from '../slices/authSlice';
 import { BASE_API_URL, handleApiError } from '../utils/routes';
-import { useTranslation } from "react-i18next";
 
 const handleSubmit = async (values, navigate, setStatus, dispatch, t) => {
   try {
@@ -55,7 +62,7 @@ const LoginPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.username}
                     isInvalid={formik.status}
-                  ></Form.Control>
+                  />
                   <Form.Label>{t('login.placeholder_username')}</Form.Label>
                 </Form.Group>
                 <Form.Group className='form-floating mb-4' controlId='password'>
@@ -69,10 +76,10 @@ const LoginPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                     isInvalid={formik.status}
-                  ></Form.Control>
+                  />
                   <Form.Label>{t('login.placeholder_password')}</Form.Label>
                   {formik.status && (
-                    <Form.Control.Feedback type="invalid" className='d-block mb-3' tooltip>
+                    <Form.Control.Feedback type="invalid" className="d-block mb-3" tooltip>
                       {formik.status}
                     </Form.Control.Feedback>
                   )}

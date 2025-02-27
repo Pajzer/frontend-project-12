@@ -1,10 +1,17 @@
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+} from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { signupSchema } from '../utils/validationForm.js';
 import { signupUser } from '../slices/authSlice.js';
-import { useTranslation } from "react-i18next";
 import registrationPic from '../assets/registration.jpg';
 
 const RegistrationPage = () => {

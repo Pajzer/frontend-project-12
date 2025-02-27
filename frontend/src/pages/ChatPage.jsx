@@ -1,12 +1,17 @@
-import { Col, Container, Row, Nav } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import {
+  Col,
+  Container,
+  Row,
+  Nav,
+} from 'react-bootstrap';
+import MessageForm from '../components/MessageForm.jsx';
 import { fetchChannelsByToken } from '../slices/channelsSlice';
 import { fetchMessagesByToken } from '../slices/messagesSlice';
-import MessageForm from '../components/MessageForm.jsx';
 import AddChannelModal from '../components/modals/AddChannelModal.jsx';
 import ChannelsList from '../components/ChannelsList.jsx';
-import { useTranslation } from "react-i18next";
 
 const ChatPage = () => {
   const dispatch = useDispatch();
@@ -61,7 +66,10 @@ const ChatPage = () => {
           <div className="d-flex flex-column h-100">
             <div className="bg-light mb-4 p-3 shadow-sm small">
               <p className="m-0">
-                <b># {ActiveChannelForTitle.name}</b>
+                <b>
+                  #
+                  {ActiveChannelForTitle.name}
+                </b>
               </p>
               <span className="text-muted">
                 {t('chat.messages_count', { count: filteredMessage.length })}

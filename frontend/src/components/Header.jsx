@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../slices/authSlice';
 import { useTranslation } from 'react-i18next';
+import { logout } from '../slices/authSlice';
 import { changeLanguage } from '../slices/langSlice';
 
 const Header = () => {
