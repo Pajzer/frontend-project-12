@@ -1,10 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   currentLanguage: 'ru',
 };
 
-const langSlice = createSlice({
+const languageSlice = createSlice({
   name: 'language',
   initialState,
   reducers: {
@@ -14,5 +16,5 @@ const langSlice = createSlice({
   },
 });
 
-export const { changeLanguage } = langSlice.actions;
-export default langSlice.reducer;
+export const { changeLanguage } = languageSlice.actions;
+export default languageSlice.reducer;

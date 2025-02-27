@@ -6,10 +6,10 @@ export const channelSchema = (channels, t, currentChannelName = '') => {
     .filter((name) => name !== currentChannelName);
   return yup.object().shape({
     name: yup.string()
-        .required(t('validation.required'))
-        .min(3, t('validation.channelNameLength'))
-        .max(20, t('validation.channelNameLength'))
-        .notOneOf([...createdChannels], t('validation.uniqueChannel')),
+      .required(t('validation.required'))
+      .min(3, t('validation.channelNameLength'))
+      .max(20, t('validation.channelNameLength'))
+      .notOneOf([...createdChannels], t('validation.uniqueChannel')),
   });
 };
 

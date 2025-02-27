@@ -1,11 +1,11 @@
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import registrationPic from '../assets/registration.jpg';
 import { useFormik } from 'formik';
 import { signupSchema } from '../utils/validationForm.js';
 import { signupUser } from '../slices/authSlice.js';
 import { useTranslation } from "react-i18next";
+import registrationPic from '../assets/registration.jpg';
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -25,7 +25,6 @@ const RegistrationPage = () => {
       if (signupUser.fulfilled.type === resultAction.type) {
         navigate('/');
       }
-
       if (signupUser.rejected.type === resultAction.type && resultAction.error.message.includes('409')) {
         setFieldError('username', t('registration.errors.alreadyRegistered'));
       }
@@ -56,7 +55,7 @@ const RegistrationPage = () => {
                     onBlur={formik.handleBlur}
                     required
                     autoFocus
-                  ></Form.Control>
+                  />
                   <Form.Label>{t('registration.placeholder_username')}</Form.Label>
                   {formik.touched.username && formik.errors.username && (
                     <Form.Control.Feedback type="invalid" tooltip>
@@ -76,7 +75,7 @@ const RegistrationPage = () => {
                     isInvalid={formik.errors.password && formik.touched.password}
                     onBlur={formik.handleBlur}
                     required
-                  ></Form.Control>
+                  />
                   <Form.Label>{t('registration.placeholder_password')}</Form.Label>
                   {formik.errors.password && (
                     <Form.Control.Feedback type="invalid" tooltip>
@@ -96,7 +95,7 @@ const RegistrationPage = () => {
                     isInvalid={formik.errors.confirmPassword && formik.touched.confirmPassword}
                     onBlur={formik.handleBlur}
                     required
-                  ></Form.Control>
+                  />
                   <Form.Label>{t('registration.placeholder_confirmPassword')}</Form.Label>
                   {formik.errors.confirmPassword && (
                     <Form.Control.Feedback type="invalid" tooltip>
