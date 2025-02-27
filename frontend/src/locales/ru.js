@@ -27,7 +27,7 @@ export default {
       messages_count_many: '{{count}} сообщений',
     },
     addChannelModal: {
-      title: 'Добавить каналы',
+      title: 'Добавить канал',
     },
     channelForm: {
       label: 'Имя канала',
@@ -50,7 +50,7 @@ export default {
       remove: 'Удалить',
     },
     renameChannelModal: {
-      title: 'Переименовать',
+      title: 'Переименовать канал',
       placeholder: 'Введите новое имя канала',
       cancel: 'Отменить',
       submit: 'Отправить',
@@ -80,7 +80,7 @@ export default {
         channelRenamed: 'Канал переименован',
       },
       error: {
-        network: 'Ой, что-то пошло не так. Проверьте ваше подключение',
+        network: 'Ой, что-то пошло не так. Проверьте ваше подключение.',
         somethingWrong: 'Ой, что-то пошло не так. Попробуйте ещё раз позже.',
       }
     }    
