@@ -67,7 +67,11 @@ const RemoveChannelModal = () => {
           >
             {t('removeChannelModal.cancel')}
           </Button>
-          <Button type="submit" variant="danger" onClick={handleRemove}>
+          <Button
+            type="submit"
+            variant="danger"
+            onClick={handleRemove}
+          >
             {t('removeChannelModal.remove')}
           </Button>
         </div>

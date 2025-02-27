@@ -14,8 +14,9 @@ const Header = () => {
     if (isLoggedIn) {
       return (
         <Button type="button" onClick={() => dispatch(logout(null))}>{t('header.logout')}</Button>
-      )
+      );
     }
+    return null;
   };
 
   const renderChatLink = () => {
@@ -24,6 +25,7 @@ const Header = () => {
         <a href='/' className='navbar-brand'>{t('header.chat')}</a>
       );
     }
+    return null;
   };
 
   const renderLanguageButtons = () => {

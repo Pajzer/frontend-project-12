@@ -84,10 +84,7 @@ const RegistrationPage = () => {
                     </Form.Control.Feedback>
                   )}
                 </Form.Group>
-                <Form.Group
-                  className="form-floating mb-3"
-                  controlId="confirmPassword"
-                >
+                <Form.Group className="form-floating mb-3" controlId="confirmPassword">
                   <Form.Control
                     className="form-control"
                     type="password"

@@ -4,7 +4,7 @@ import { BASE_API_URL, handleApiError } from '../utils/routes';
 
 const getInitialState = () => {
   const localToken = localStorage.getItem('token');
-  const localUser = localStorage.getItem('user')
+  const localUser = localStorage.getItem('user');
   return localToken
     ? { token: localToken, isLoggedIn: true, username: localUser }
     : { token: null, isLoggedIn: false, username: null };
@@ -27,7 +27,7 @@ const authSlice = createSlice({
       state.username = action.payload.username;
       state.isLoggedIn = true;
       localStorage.setItem('token', state.token);
-      localStorage.setItem('user', state.username)
+      localStorage.setItem('user', state.username);
     },
     logout: (state, action) => {
       state.token = action.payload;
@@ -47,7 +47,7 @@ const authSlice = createSlice({
         state.username = payload.username;
         state.isLoggedIn = true;
         localStorage.setItem('token', state.token);
-        localStorage.setItem('user', state.username)
+        localStorage.setItem('user', state.username);
         state.loadingStatus = 'idle';
         state.error = null;
       })
@@ -55,7 +55,7 @@ const authSlice = createSlice({
         state.loadingStatus = 'rejected';
         state.error = action.error;
         handleApiError(action.error);
-      })
+      });
   }
 });
 

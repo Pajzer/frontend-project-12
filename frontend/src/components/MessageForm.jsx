@@ -21,7 +21,7 @@ const MessageForm = () => {
       const newMessage = {
         body: cleanMessages,
         channelId: activeChannelId,
-        username: username,
+        username,
       };
       dispatch(sendMessagesByToken({ token, newMessage }));
       resetForm();

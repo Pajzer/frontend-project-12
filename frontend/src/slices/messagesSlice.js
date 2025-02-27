@@ -20,7 +20,7 @@ export const sendMessagesByToken = createAsyncThunk(
     });
     return response.data;
   }
-)
+);
 
 const messagesSlice = createSlice({
   name: 'messages',
@@ -61,7 +61,7 @@ const messagesSlice = createSlice({
       state.loadingStatus = 'rejected';
       state.error = action.error;
       handleApiError(action.error);
-    })
+    });
   },
 });
 

@@ -3,12 +3,12 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import App from './App.jsx';
 import resources from './locales/index.js';
 import { Provider } from 'react-redux';
-import store from './slices/index.js'
-import { io } from 'socket.io-client'
+import store from './slices/index.js';
+import { io } from 'socket.io-client';
 import { addMessage, removeMessageByChannelId } from './slices/messagesSlice.js';
 import { addChannel, removeChannel, renameChannel } from './slices/channelsSlice.js';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 import leoProfanity from 'leo-profanity';
 import { ErrorBoundary } from "@rollbar/react";
 
