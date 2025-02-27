@@ -94,6 +94,7 @@ const channelsSlice = createSlice({
         state.error = null;
       })
       .addCase(createChannelsByToken.fulfilled, (state, { payload }) => {
+        state.channelsData.push(payload);
         state.activeChannelId = payload.id;
         state.loadingStatus = 'idle';
         state.error = null;
