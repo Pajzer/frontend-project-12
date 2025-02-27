@@ -79,6 +79,7 @@ const RenameChannelModal = () => {
               value={formik.values.name}
               isInvalid={formik.errors.name && formik.touched.name}
             ></Form.Control>
+            <label className="visually-hidden" htmlFor="name">{t('renameChannelModal.hidden_title')}</label>
             <Form.Control.Feedback type="invalid">
               {formik.errors.name}
             </Form.Control.Feedback>

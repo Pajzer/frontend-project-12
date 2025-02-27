@@ -23,7 +23,8 @@ export default {
     chat: {
       title: 'Channels',
       messages_count: '{{count}} message',
-      messages_count_other: '{{count}} messages',
+      messages_count_plural: '{{count}} messages',
+      messages_count_many: '{{count}} messages',
     },    
     addChannelModal: {
       title: 'Add Channel',
@@ -53,6 +54,7 @@ export default {
       placeholder: 'Enter a new channel name',
       cancel: 'Cancel',
       submit: 'Submit',
+      hidden_title: 'Channel name',
     },
     header: {
       title: 'Hexlet Chat',
