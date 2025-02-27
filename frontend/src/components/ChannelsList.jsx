@@ -1,6 +1,6 @@
 import { Button, Nav, Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import { selectActiveTab } from '../slices/channelsSlice';
 import { setStatusChannelModal } from '../slices/modalsSlice';
 import RemoveChannelModal from './modals/RemoveChannelModal';

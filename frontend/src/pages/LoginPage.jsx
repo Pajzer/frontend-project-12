@@ -10,7 +10,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import { loginSuccess } from '../slices/authSlice';
 import { BASE_API_URL, handleApiError } from '../utils/routes';
 import loginPic from '../assets/login.jpg';
