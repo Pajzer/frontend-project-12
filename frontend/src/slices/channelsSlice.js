@@ -84,7 +84,6 @@ const channelsSlice = createSlice({
         state.channelsData = payload;
         state.loadingStatus = 'idle';
         state.error = null;
-
       })
       .addCase(fetchChannelsByToken.rejected, (state, action) => {
         state.loadingStatus = 'rejected';

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import {
   Col,
   Container,
@@ -38,12 +38,11 @@ const ChatPage = () => {
         key={message.id}
       >
         <span className={message.username === username ? 'fw-bold' : 'fw-normal'}>
-          {message.username}
-          :
+          {message.username}:
           {' '}
         </span>
         {message.body}
-        </div>
+      </div>
     ));
 
   return (
