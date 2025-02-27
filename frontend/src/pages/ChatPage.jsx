@@ -30,8 +30,8 @@ const ChatPage = () => {
     dispatch(fetchMessagesByToken(token));
   }, [dispatch, token]);
 
-  const renderMessages = () => {
-    return filteredMessage.map((message) => (
+  const renderMessages = () =>
+    filteredMessage.map((message) => (
       <div
         id="messages-box"
         className="chat-messages overflow-auto px-5"
@@ -43,7 +43,6 @@ const ChatPage = () => {
         {message.body}
       </div>
     ));
-  };
 
   return (
     <Container className="h-100 my-4 overflow-hidden rounded shadow">
