@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
@@ -25,20 +25,24 @@ const ChatPage = () => {
   const ActiveChannelForTitle = channelsData.find((c) => c.id === activeChannelId) || {};
   const filteredMessage = messagesData.filter((m) => m.channelId === activeChannelId);
 
+  const messagesEndRef = useRef(null);
+
   useEffect(() => {
     dispatch(fetchChannelsByToken(token));
     dispatch(fetchMessagesByToken(token));
   }, [dispatch, token]);
 
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [filteredMessage]);
+
   const renderMessages = () => filteredMessage.map((message) => (
-    <div
-      id="messages-box"
-      className="chat-messages overflow-auto px-5"
-      key={message.id}
-    >
-      <span className={message.username === username ? 'fw-bold' : 'fw-normal'}>
-        {`${message.username}: `}
-      </span>
+    <div className="text-break mb-2" key={message.id}>
+      <b className={message.username === username ? 'fw-bold' : 'fw-normal'}>{message.username}</b>
+      :
+      {' '}
       {message.body}
     </div>
   ));
@@ -64,7 +68,7 @@ const ChatPage = () => {
             <div className="bg-light mb-4 p-3 shadow-sm small">
               <p className="m-0">
                 <b>
-                  #
+                  <span># </span>
                   {ActiveChannelForTitle.name}
                 </b>
               </p>
@@ -72,7 +76,13 @@ const ChatPage = () => {
                 {t('chat.messages_count', { count: filteredMessage.length })}
               </span>
             </div>
-            {renderMessages()}
+            <div
+              id="messages-box"
+              className="chat-messages overflow-auto px-5"
+            >
+              {renderMessages()}
+              <div ref={messagesEndRef} />
+            </div>
             <div className="mt-auto px-5 py-3">
               <MessageForm />
             </div>
