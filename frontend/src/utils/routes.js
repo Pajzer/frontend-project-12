@@ -16,7 +16,7 @@ export const handleApiError = (error) => {
   if (error.code === 'ERR_NETWORK') {
     toast.error(t('notifications.error.network'));
   } else if (error.message.includes('409')) {
-    toast.error(t('registration.errors.alredyRegistred'));  
+    toast.error(t('registration.errors.alredyRegistred'));
   } else {
     toast.error(t('notifications.error.somethingWrong'));
   }
