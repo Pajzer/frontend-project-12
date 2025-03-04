@@ -12,16 +12,19 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { loginSuccess } from '../slices/authSlice';
-import { BASE_API_URL, handleApiError } from '../utils/routes';
+import { apiPath, handleApiError, appRoutes } from '../utils/routes';
 import loginPic from '../assets/login.jpg';
 
 const handleSubmit = async (values, navigate, setStatus, dispatch, t) => {
   try {
-    const { data } = await axios.post(`${BASE_API_URL}/login`, { username: values.username, password: values.password });
+    const { data } = await axios.post(apiPath.loginPath(), {
+      username: values.username,
+      password: values.password,
+    });
     const { token, username } = data;
     dispatch(loginSuccess({ token, username }));
     setStatus();
-    navigate('/');
+    navigate(appRoutes.main);
   } catch (error) {
     if (error.code === 'ERR_NETWORK') {
       handleApiError(error, t);
@@ -97,7 +100,7 @@ const LoginPage = () => {
               <div className="text-center">
                 <span>{t('login.span')}</span>
                 {' '}
-                <a href="/signup">{t('login.registration')}</a>
+                <a href={appRoutes.signup}>{t('login.registration')}</a>
               </div>
             </Card.Footer>
           </Card>

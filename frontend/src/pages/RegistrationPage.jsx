@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { signupSchema } from '../utils/validationForm.js';
 import { signupUser } from '../slices/authSlice.js';
 import registrationPic from '../assets/registration.jpg';
+import { appRoutes } from '../utils/routes';
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const RegistrationPage = () => {
       const resultAction = await dispatch(signupUser({ username, password }));
 
       if (signupUser.fulfilled.type === resultAction.type) {
-        navigate('/');
+        navigate(appRoutes.main);
       }
       if (signupUser.rejected.type === resultAction.type && resultAction.error.message.includes('409')) {
         setFieldError('username', t('registration.errors.alreadyRegistered'));

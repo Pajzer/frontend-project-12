@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import page404 from '../assets/page404.svg';
+import { appRoutes } from '../utils/routes';
 
 const PageNotFound = () => {
   const { t } = useTranslation();
@@ -17,7 +18,7 @@ const PageNotFound = () => {
         <p className="text-muted">
           {t('page404.description')}
           {' '}
-          <Link to="/">
+          <Link to={appRoutes.main}>
             {t('page404.link')}
           </Link>
         </p>

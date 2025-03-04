@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { logout } from '../slices/authSlice';
 import { changeLanguage } from '../slices/langSlice';
+import { appRoutes } from '../utils/routes';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Header = () => {
   const renderChatLink = () => {
     if (isLoggedIn) {
       return (
-        <a href="/" className="navbar-brand">{t('header.chat')}</a>
+        <a href={appRoutes.main} className="navbar-brand">{t('header.chat')}</a>
       );
     }
     return null;
@@ -59,7 +60,7 @@ const Header = () => {
     <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
       <div className="container d-flex justify-content-between align-items-center">
         <div className="d-flex align-items-center">
-          <a href="/login" className="navbar-brand">
+          <a href={appRoutes.login} className="navbar-brand">
             {t('header.title')}
           </a>
           {renderChatLink()}

@@ -4,6 +4,7 @@ import PageNotFound from './pages/NotFoundPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import ChatPage from './pages/ChatPage.jsx';
 import ProtectedRoutes from './utils/ProtectedRoutes.jsx';
+import { appRoutes } from './utils/routes.js';
 import Header from './components/Header.jsx';
 import RegistrationPage from './pages/RegistrationPage.jsx';
 
@@ -12,10 +13,10 @@ const App = () => (
     <Header />
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<RegistrationPage />} />
+        <Route path={appRoutes.login} element={<LoginPage />} />
+        <Route path={appRoutes.signup} element={<RegistrationPage />} />
         <Route element={<ProtectedRoutes />}>
-          <Route path="/" element={<ChatPage />} />
+          <Route path={appRoutes.main} element={<ChatPage />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

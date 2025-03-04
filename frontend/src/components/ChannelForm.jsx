@@ -40,6 +40,7 @@ const ChannelForm = () => {
           value={formik.values.name}
           isInvalid={formik.errors.name && formik.touched.name}
           placeholder={t('channelForm.label')}
+          autoFocus
         />
         <label className="visually-hidden" htmlFor="name">
           {t('channelForm.label')}
